@@ -7,18 +7,28 @@ class alphabet:
     str = 'abcdefghijklmnopqrstuvwxyz'
     array = list(str) 
 
-def positionOverflow(place, nbMax = 25) :
+def positionOverflow(place, nbMax = 26) :
     a = place // nbMax
     b = place - a * nbMax
     return b 
 
-def changeLetter(texte, decalage) : 
+def changeLetterBasic(texte, decalage) : 
     for i in range(len(texte)) :
-        # print(i)
         for y in range (26) :
             if alphabet.array[y] == texte[i]:
                 texte[i] = alphabet.array[positionOverflow(y + decalage)]
                 break
     return(texte)
 
-print(changeLetter(file.fileContent, 5))
+def changeLetterAffine(texte, decalage) : 
+    for i in range(len(texte)) :
+        for y in range (26) :
+            if alphabet.array[y] == texte[i]:
+                texte[i] = alphabet.array[positionOverflow(stringToAffine(3,2,y))]
+                break
+    return(texte)
+
+def stringToAffine(a,b,x) :
+    return x**a 
+
+print(changeLetterAffine(file.fileContent, 5))
